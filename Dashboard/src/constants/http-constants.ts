@@ -1,0 +1,3 @@
+export const TOKEN = `ts-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJwaXQiLCJ2aXAiOmZhbHNlLCJjbGllbnRfdHlwZXMiOlsibmZsX25jYWEiXSwiaWF0IjoxNzQ2MjAzNzUxLCJleHAiOjE3NDY1NDkzNTEsImlkIjoiNjgxNGY0Njc1NzFkNDQ1ODE2YTVkYzUxIn0.KALaez4Ac3IxIiuEcJGCvo4A4w-qfprqat8Yl11tCUI`;
+export const SEASON_URL = `https://wire.telemetry.fm/ncaa/schedules/by-season`;
+export const GAMES_URL = `https://wire.telemetry.fm/ncaa/plays/game-id`;

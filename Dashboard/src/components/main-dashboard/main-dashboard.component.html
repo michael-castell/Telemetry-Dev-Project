@@ -1,0 +1,91 @@
+@if(loading) {
+<mat-spinner class="spinner"></mat-spinner>
+}
+<div class="main-dashboard">
+    <button (click)="toggleReports()" class="btn btn-success pull-right">Toggle
+        Report Type</button>
+    @if( gameReports ) {
+    <div style="margin-bottom: 20px;"></div>
+    <h1>Use the following filters to view Game Reports</h1>
+    <p>Enter a year to populate dropdowns. Select team and opponent to populate the table.</p>
+    <div class="separator"></div>
+    <form [formGroup]="filtersForm">
+        <div>
+            <mat-label>Enter Year*: </mat-label>
+            <input matInput formControlName="season" placeholder="e.g., 2023" class="year-input" type="number"
+                (change)="onYearChange($event)">
+        </div>
+        <mat-form-field style="float: left; margin-right: 40px">
+            <mat-label>Select a team</mat-label>
+            <mat-select formControlName="team">
+                @for (team of teams; track team) {
+                <mat-option id="team" [value]="team.name" (click)="onTeamChange($event)">{{team.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select opponent</mat-label>
+            <mat-select formControlName="week">
+                @for (week of weeks; track week) {
+                <mat-option id="week" [value]="week.week" (click)="onOpponentChange($event)">{{week.week}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button (click)="onSubmit()">Export</button>
+    <div style="margin-bottom: 20px"></div>
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" style="width: 500px">
+
+        <ng-container matColumnDef="play_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Play ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.play_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="offense">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Offense </th>
+            <td mat-cell *matCellDef="let element"> {{element.offense}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="defense">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Defense </th>
+            <td mat-cell *matCellDef="let element"> {{element.defense}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="yardline">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Yard Line </th>
+            <td mat-cell *matCellDef="let element"> {{element.yardline}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="yards_to_go">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Yards To Go </th>
+            <td mat-cell *matCellDef="let element"> {{element.yards_to_go}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="down">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Down </th>
+            <td mat-cell *matCellDef="let element"> {{element.down}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    } @else {
+    <p style="margin-top: 40px">GameID is a required field. If PlayerID is given but not PlayID, a list of all plays that player was in for that
+        game will be included.</p>
+    <p>If PlayID is given but not PlayerID, the play is included. The behavior is the same if
+        all are included.</p>
+    <div style="margin-bottom: 20px;"></div>
+    <h1>Use the following filters to view Player Reports</h1>
+    <div style="margin-bottom: 40px;"></div>
+    <mat-label>Enter GameID*: </mat-label>
+    <input matInput placeholder="e.g., 21597" class="year-input" type="number" (change)="onGameIDChange($event)">
+    <div></div>
+    <mat-label>Enter PlayerID: </mat-label>
+    <input matInput placeholder="e.g., LAN142724" class="year-input" type="text" (change)="onPlayerIDChange($event)">
+    <div></div>
+    <mat-label>Enter PlayID: </mat-label>
+    <input matInput placeholder="e.g., 4457765" class="year-input" type="number" (change)="onPlayIDChange($event)">
+    <div></div>
+    <button mat-raised-button (click)="onSubmitPlayer()">Export</button>
+    }
+</div>

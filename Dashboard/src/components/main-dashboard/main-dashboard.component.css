@@ -1,0 +1,20 @@
+.main-dashboard {
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.year-input{
+    margin-bottom: 40px;
+}
+
+.separator{
+    margin-bottom: 80px;
+}
+
+.spinner{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 200px;
+    z-index: 1000;
+}
